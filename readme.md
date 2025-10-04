@@ -1,81 +1,150 @@
-# Simple Countries REST API
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Falphaolomi%2Fcountries-restapi.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Falphaolomi%2Fcountries-restapi?ref=badge_shield)
+# Countries REST API
 
- 
-API for getting information about countries.
+A simple REST API for retrieving country information based on ISO 3166-1 standard. This API provides country data including names, codes, emojis, and detailed information.
 
-API is based on [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1) standard.
+## 🚀 Quick Start
 
-## Endpoints
+### Installation
 
-### GET /countries
+```bash
+# Clone the repository
+git clone https://github.com/alphaolomi/countries-restapi.git
+cd countries-restapi
 
+# Install dependencies
+npm install
+
+# Start the server
+npm start
+```
+
+The API will be available at `http://localhost:3000` (or the port specified in the PORT environment variable).
+
+## 📚 API Endpoints
+
+### Get All Countries
+
+Retrieve a list of all countries with basic information.
+
+**Endpoint:** `GET /countries`
+
+**cURL Example:**
+```bash
+curl -X GET http://localhost:3000/countries
+```
+
+**Response:**
 ```json
 [
   {
     "id": "AD",
-    "shortName": "Andorra",
     "name": "Andorra",
     "emoji": "🇦🇩"
   },
-//   ...
+  {
+    "id": "AE",
+    "name": "United Arab Emirates",
+    "emoji": "🇦🇪"
+  }
 ]
 ```
 
+### Get Specific Country
 
-### GET /countries?id=TZ
+Retrieve information for a specific country by its ISO 3166-1 alpha-2 code.
 
+**Endpoint:** `GET /countries/:code`
 
+**cURL Example:**
+```bash
+curl -X GET http://localhost:3000/countries/US
+```
+
+**Response:**
 ```json
 {
-    "id": "TZ",    
-    "name": "Tanzania, United Republic of",
-    "emoji": "🇹🇿"
-},
+  "id": "US",
+  "name": "United States of America",
+  "emoji": "🇺🇸"
+}
 ```
 
-### GET /countriesFull
+### Get Detailed Country Information
 
+Retrieve comprehensive information for a specific country including alpha-2, alpha-3, and numeric codes.
+
+**Endpoint:** `GET /countries/:code/details`
+
+**cURL Example:**
+```bash
+curl -X GET http://localhost:3000/countries/US/details
+```
+
+**Response:**
 ```json
-[
-//    ...
-  {
-    "name": "Tanzania",
-    "altSpellings": [
-      "TZ",
-      "United Republic of Tanzania",
-      "Jamhuri ya Muungano wa Tanzania"
-    ],
-    "area": 945087,
-    "borders": [ "BDI", "COD", "KEN", "MWI", "MOZ", "RWA", "UGA", "ZMB" ],
-    "callingCodes": [ "255"],
-    "capital": "Dodoma",
-//    ...
-  }
-]
+{
+  "id": "US",
+  "name": "United States of America",
+  "emoji": "🇺🇸",
+  "alpha2": "US",
+  "alpha3": "USA",
+  "numeric": "840"
+}
 ```
 
-### GET /countriesFull?name=Tanzania
+### Health Check
 
+Check if the API is running and responsive.
+
+**Endpoint:** `GET /health`
+
+**cURL Example:**
+```bash
+curl -X GET http://localhost:3000/health
+```
+
+**Response:**
 ```json
-  {
-    "name": "Tanzania",
-    "altSpellings": [
-      "TZ",
-      "United Republic of Tanzania",
-      "Jamhuri ya Muungano wa Tanzania"
-    ],
-    "area": 945087,
-    "borders": [ "BDI", "COD", "KEN", "MWI", "MOZ", "RWA", "UGA", "ZMB" ],
-    "callingCodes": [ "255"],
-    "capital": "Dodoma",
-//    ...
-  }
+{
+  "status": "OK",
+  "timestamp": "2024-01-15T10:30:00.000Z"
+}
 ```
+
+## 🔧 Error Handling
+
+The API returns appropriate HTTP status codes:
+
+- `200` - Success
+- `404` - Country not found
+- `500` - Internal server error
+
+**Error Response Example:**
+```json
+{
+  "error": "Country not found"
+}
+```
+
+## 📋 Available Scripts
+
+- `npm start` - Start the production server
+- `npm run dev` - Start the development server
+
+## 🌍 Country Codes
+
+This API uses ISO 3166-1 alpha-2 country codes (e.g., "US", "GB", "DE"). You can find a complete list of valid codes in the [ISO 3166-1 standard](https://en.wikipedia.org/wiki/ISO_3166-1).
 
 ## 📝 License
 
-This API is licensed under [MIT](http://opensource.org/licenses/MIT).
+This project is licensed under the [MIT License](http://opensource.org/licenses/MIT).
 
+## 🤝 Contributing
 
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Falphaolomi%2Fcountries-restapi.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Falphaolomi%2Fcountries-restapi?ref=badge_large)
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📧 Contact
+
+Alpha Olomi - alphaolomi@gmail.com
+
+Project Link: [https://github.com/alphaolomi/countries-restapi](https://github.com/alphaolomi/countries-restapi)
