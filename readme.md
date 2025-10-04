@@ -36,6 +36,16 @@ npm start
 
 The API will be available at `http://localhost:3000` (or the port specified in the PORT environment variable).
 
+
+## 🔍 Research
+- [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1)
+- [i18n-iso-countries](https://www.npmjs.com/package/i18n-iso-countries)
+- [Express](https://expressjs.com/)
+- [Node.js](https://nodejs.org/)
+- [JSON](https://www.json.org/json-en.html)
+- [REST API](https://en.wikipedia.org/wiki/Representational_state_transfer)
+- [Country.js](https://country.js.org/)
+
 ## 📚 API Endpoints
 
 ### Get All Countries
