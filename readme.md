@@ -2,6 +2,22 @@
 
 A simple REST API for retrieving country information based on ISO 3166-1 standard. This API provides country data including names, codes, emojis, and detailed information.
 
+## 🌐 Features
+
+- Get all countries
+- Get specific country
+- Get detailed country information
+- Health check
+
+## 📦 Technologies
+
+- Node.js
+- Express
+- i18n-iso-countries
+- ISO 3166-1 standard
+- REST API
+- JSON
+
 ## 🚀 Quick Start
 
 ### Installation
@@ -134,6 +150,10 @@ The API returns appropriate HTTP status codes:
 ## 🌍 Country Codes
 
 This API uses ISO 3166-1 alpha-2 country codes (e.g., "US", "GB", "DE"). You can find a complete list of valid codes in the [ISO 3166-1 standard](https://en.wikipedia.org/wiki/ISO_3166-1).
+
+## 📦 Dependencies
+
+This project relies on the [i18n-iso-countries](https://www.npmjs.com/package/i18n-iso-countries) package for country data and ISO 3166-1 standard compliance. The package provides comprehensive country information including names, codes, and locale support.
 
 ## 📝 License
 
