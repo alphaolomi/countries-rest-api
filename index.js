@@ -1,20 +1,94 @@
-const { getData } = require("country-list");
-const { flag } = require("country-emoji");
-const country = require("countryjs");
+const express = require('express');
+const countries = require('i18n-iso-countries');
 
-module.exports = () => {
-  const countries = getData();
+// Register English locale
+countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 
-  const countriesEmoji = [];
-  for (let i = 0; i < countries.length; i++) {
-    countriesEmoji.push({
-      id: countries[i].code,
-      name: countries[i].name,
-      emoji: flag(countries[i].code),
-    });
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware
+app.use(express.json());
+
+// Get all countries
+app.get('/countries', (req, res) => {
+  try {
+    const countryCodes = countries.getNames('en');
+    const countriesList = Object.keys(countryCodes).map(code => ({
+      id: code,
+      name: countryCodes[code],
+      emoji: getCountryEmoji(code)
+    }));
+    
+    res.json(countriesList);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
   }
+});
 
-  const data = { countries: countriesEmoji, countriesFull: country.all() };
+// Get specific country by code
+app.get('/countries/:code', (req, res) => {
+  try {
+    const code = req.params.code.toUpperCase();
+    const name = countries.getName(code, 'en');
+    
+    if (!name) {
+      return res.status(404).json({ error: 'Country not found' });
+    }
+    
+    res.json({
+      id: code,
+      name: name,
+      emoji: getCountryEmoji(code)
+    });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
-  return data;
-};
+// Get detailed country information
+app.get('/countries/:code/details', (req, res) => {
+  try {
+    const code = req.params.code.toUpperCase();
+    const name = countries.getName(code, 'en');
+    
+    if (!name) {
+      return res.status(404).json({ error: 'Country not found' });
+    }
+    
+    res.json({
+      id: code,
+      name: name,
+      emoji: getCountryEmoji(code),
+      alpha2: code,
+      alpha3: countries.alpha2ToAlpha3(code),
+      numeric: countries.alpha2ToNumeric(code)
+    });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Helper function to get country emoji
+function getCountryEmoji(code) {
+  const codePoints = code
+    .toUpperCase()
+    .split('')
+    .map(char => 127397 + char.charCodeAt());
+  return String.fromCodePoint(...codePoints);
+}
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ status: 'OK', timestamp: new Date().toISOString() });
+});
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`Countries REST API running on port ${PORT}`);
+  console.log(`Available endpoints:`);
+  console.log(`  GET /countries - Get all countries`);
+  console.log(`  GET /countries/:code - Get specific country`);
+  console.log(`  GET /countries/:code/details - Get detailed country info`);
+  console.log(`  GET /health - Health check`);
+});
