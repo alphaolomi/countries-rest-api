@@ -36,6 +36,16 @@ npm start
 
 The API will be available at `http://localhost:3000` (or the port specified in the PORT environment variable).
 
+
+## 🔍 Research
+- [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1)
+- [i18n-iso-countries](https://www.npmjs.com/package/i18n-iso-countries)
+- [Express](https://expressjs.com/)
+- [Node.js](https://nodejs.org/)
+- [JSON](https://www.json.org/json-en.html)
+- [REST API](https://en.wikipedia.org/wiki/Representational_state_transfer)
+- [Country.js](https://country.js.org/)
+
 ## 📚 API Endpoints
 
 ### Get All Countries
@@ -146,14 +156,45 @@ The API returns appropriate HTTP status codes:
 
 - `npm start` - Start the production server
 - `npm run dev` - Start the development server
+- `npm test` - Run tests in watch mode
+- `npm run test:run` - Run tests once
+- `npm run test:coverage` - Run tests with coverage report
 
 ## 🌍 Country Codes
 
 This API uses ISO 3166-1 alpha-2 country codes (e.g., "US", "GB", "DE"). You can find a complete list of valid codes in the [ISO 3166-1 standard](https://en.wikipedia.org/wiki/ISO_3166-1).
 
+## 🧪 Testing
+
+This project uses [Vitest](https://vitest.dev/) for testing with comprehensive test coverage:
+
+- **Unit Tests**: All API endpoints are tested
+- **Mocking**: External dependencies are properly mocked
+- **Coverage**: Test coverage reports are generated
+- **CI/CD**: Automated testing via GitHub Actions
+
+### Running Tests
+
+```bash
+# Run tests in watch mode
+npm test
+
+# Run tests once
+npm run test:run
+
+# Run tests with coverage
+npm run test:coverage
+```
+
 ## 📦 Dependencies
 
 This project relies on the [i18n-iso-countries](https://www.npmjs.com/package/i18n-iso-countries) package for country data and ISO 3166-1 standard compliance. The package provides comprehensive country information including names, codes, and locale support.
+
+### Testing Dependencies
+
+- **Vitest**: Fast unit testing framework
+- **Supertest**: HTTP assertion library for API testing
+- **@vitest/coverage-v8**: Coverage reporting
 
 ## 📝 License
 
@@ -162,6 +203,15 @@ This project is licensed under the [MIT License](http://opensource.org/licenses/
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 🚀 CI/CD
+
+This project includes automated CI/CD via GitHub Actions:
+
+- **Automated Testing**: Runs on Node.js 18.x, 20.x, and 22.x
+- **Coverage Reports**: Generates and uploads test coverage
+- **Security Audits**: Automated dependency vulnerability scanning
+- **Multi-Platform**: Tests on Ubuntu, Windows, and macOS
 
 ## 📧 Contact
 

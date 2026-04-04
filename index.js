@@ -10,6 +10,17 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(express.json());
 
+
+// Index endpoint
+app.get('/', (req, res) => {
+  res.json([
+    { path: '/countries', method: 'GET', description: 'Get all countries' },
+    { path: '/countries/:code', method: 'GET', description: 'Get specific country' },
+    { path: '/countries/:code/details', method: 'GET', description: 'Get detailed country info' },
+    { path: '/health', method: 'GET', description: 'Health check' }
+  ]);
+});
+
 // Get all countries
 app.get('/countries', (req, res) => {
   try {
